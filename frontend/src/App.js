@@ -128,7 +128,7 @@ class App extends React.Component {
     }
      deleteTodo(id){
         const headers = this.get_headers()
-        axios.delete(`http://127.0.0.1:8001/api/todo/${id}`, {headers})
+        axios.delete(`http://127.0.0.1:8008/api/todo/${id}`, {headers})
             .then(response =>{
                 this.state.todos.filter((item)=>item.id == id)[0].completed=true
                 this.setState({todos:this.state.todos})
