@@ -1,4 +1,4 @@
-from python:3.8.6
+FROM python:3.8.6
 RUN apt-get update \
 && apt-get install -y postgresql postgresql-contrib libpq-dev python3-dev
 RUN pip3 install --upgrade pip

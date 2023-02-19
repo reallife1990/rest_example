@@ -9,18 +9,18 @@ services:
      POSTGRES_USER: dante
      POSTGRES_PASSWORD: dante123456
      POSTGRES_DB: library
-  adminer:
-    image: adminer:4.7.8-standalone
-    restart: always
-    ports:
-      - 8080:8080
-    depends_on:
-      - db
+  # adminer:
+  #   image: adminer:4.7.8-standalone
+  #   restart: always
+  #   ports:
+  #     - 8080:8080
+  #   depends_on:
+  #     - db
   backend:
     build:
       context: .
-    expose:
-      - 8088
+    ports:
+      - 8088:8088
     command: bash -c
       " ./wait-for-postgres.sh db
       && python manage.py migrate
@@ -31,14 +31,12 @@ services:
   nginx:
     build: ./nginx
     ports:
-      - 8008:8002
+      - 8008:80
     depends_on:
       - backend
-    expose:
-      - 8088
   frontend:
     build: ./frontend
     ports:
-      - 8005:8008
+      - 8005:80
     depends_on:
       - nginx
